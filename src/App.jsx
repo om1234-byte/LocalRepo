@@ -58,7 +58,7 @@ const totalCount=Object.keys(cart).reduce(function(previous,current){
    </Routes>
  
    </div>
-   <NavBar/>
+  
     </div>         
 
   
