@@ -52,12 +52,13 @@ useEffect(function (){
    if(!product){
       return <NoMatch text={"Opps! Page not found"}/>
    }
+  
     
     return  (
     <>
        <Link to="/" className="mt-4 p-1 bg-indigo-600 "> Back to product page</Link>
     <div>
-        <img className='w-40' src={product.thumbnail}/>
+        <img className='w-40' src={product.thumbnail } alt="not load"/>
      <h1>{product.title}</h1>
      <p>{product.category}</p>
      <p>{product.prize}</p>
@@ -71,7 +72,7 @@ useEffect(function (){
       </div>
          
     </>)
-   
+ 
 }
 
     

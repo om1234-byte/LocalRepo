@@ -45,13 +45,14 @@ function ProductListPage() {
     function handleSort(event){
       setSort(event.target.value);
     }
+    console.log(sort);
     if (sort == "price"){
       data.sort(function(x,y){
-       return x.prize-y.prize;
+       return x.price-y.price;
       });
     } else if(sort == "name"){
       data.sort(function(x,y){
-        return (x.pName<y.pName)?-1:1;
+        return (x.title<y.title)?-1:1;
       });
         
       }

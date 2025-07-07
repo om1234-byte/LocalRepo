@@ -41,15 +41,23 @@ function App(){
      localStorage.setItem("myCart",cartstring);
    
   }
-const totalCount=Object.keys(cart).reduce(function(previous,current){
+ const totalCount=Object.keys(cart).reduce(function(previous,current){
   return previous + cart[current];
-},0);
-  
+ },0);
+
+
+ 
   
   //                                         index determine home page hence no url need for it
-  return (<>
+  return (
+
+   <>
+ 
+
   <div className='bg-gray-200  h-screen overflow-auto flex flex-col'>
     <NavBar  count={totalCount}/>
+   
+
   <div className='grow'>
     <Routes>
     <Route index element={<ProductListPage/>} ></Route>                           
@@ -62,8 +70,11 @@ const totalCount=Object.keys(cart).reduce(function(previous,current){
     </div>         
 
   
-  </> );
+  </>
+ );
 
+    
+  
 }
 
 export default App;
