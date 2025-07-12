@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import ProductDetail from "./ProductDetail";
 function ProductList( {product}){
     return (<>
@@ -16,6 +16,6 @@ function ProductList( {product}){
   </div>
     </>);
 }
- 
-export default ProductList;
+
+export default memo(ProductList);
 

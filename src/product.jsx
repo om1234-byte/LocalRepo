@@ -2,7 +2,7 @@ import React, {useState, useEffect } from "react";
 import { useParams,Link } from "react-router-dom";
 //import alldata from "./projects/DummyData";
 import { getProductData } from "./projects/api";
-import Loading from "./projects/loading";
+import Loading, { imageLoading } from "./projects/loading";
 import NoMatch from "./projects/NoMatching";
 
 
@@ -53,12 +53,12 @@ useEffect(function (){
       return <NoMatch text={"Opps! Page not found"}/>
    }
   
-    
+ 
     return  (
     <>
        <Link to="/" className="mt-4 p-1 bg-indigo-600 "> Back to product page</Link>
     <div>
-        <img className='w-40' src={product.thumbnail } alt="not load"/>
+        <img className='w-40' src={product.thumbnail || <imageLoading/>} alt="not load"/>
      <h1>{product.title}</h1>
      <p>{product.category}</p>
      <p>{product.prize}</p>

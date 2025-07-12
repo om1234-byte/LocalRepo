@@ -4,17 +4,18 @@ import { useState } from 'react'
 //import viteLogo from '/vite.svg'
 import './App.css'
 import {Products } from './product'
-import ProductList from './projects/productList'
+//import ProductList from './projects/productList'
 //import Table from '../projects/table'
 //import Tablerow from '../projects/tablerow';
 import ProductListPage from './projects/productListPage';
-import ProductDetail from './projects/ProductDetail';
+//import ProductDetail from './projects/ProductDetail';
 //import LecturePage from '../projects/LecturePage';
 //import AssignmentPage from '../projects/AssignmentPage';
 //import Side_bar_R from '../projects/side_barWithRouter';
 import { Routes ,Route} from 'react-router-dom';
 import NavBar from './projects/navbar';
 import NoMatch from './projects/NoMatching';
+import LoginForm from './projects/loginForm';
 
 
 // const [count, setCount] = useState(0)      //inform react about any change in code
@@ -50,10 +51,7 @@ function App(){
   
   //                                         index determine home page hence no url need for it
   return (
-
    <>
- 
-
   <div className='bg-gray-200  h-screen overflow-auto flex flex-col'>
     <NavBar  count={totalCount}/>
    
@@ -62,7 +60,9 @@ function App(){
     <Routes>
     <Route index element={<ProductListPage/>} ></Route>                           
     <Route path = "/projects/product/:id" element={<Products addToCart={setAddToCart}/>}></Route>
+     <Route path="/loginform" element={<LoginForm/>}/>
      <Route path = "*" element={<NoMatch text={"not found"}/>}/>
+    
    </Routes>
  
    </div>
@@ -79,8 +79,20 @@ function App(){
 
 export default App;
  
-//<Routes>
- // <Route index element={<ProductListPage/>} ></Route>                          
-  //<Route path = '/projects/product/:id' element={<Products/>}></Route>
-//</Routes>
 
+/*
+ <div className='bg-gray-200  h-screen overflow-auto flex flex-col'>
+    <NavBar  count={totalCount}/>
+   
+
+  <div className='grow'>
+    <Routes>
+    <Route index element={<ProductListPage/>} ></Route>                           
+    <Route path = "/projects/product/:id" element={<Products addToCart={setAddToCart}/>}></Route>
+     <Route path = "*" element={<NoMatch text={"not found"}/>}/>
+   </Routes>
+ 
+   </div>
+  
+    </div>   
+    */

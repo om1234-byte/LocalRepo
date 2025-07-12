@@ -16,4 +16,11 @@ function Loading() {
   );
 }
 
+export function imageLoading(){
+   return(
+    <div className="cover bg-gray-400 aspect-square flex items-center justify-center">
+       <ImSpinner9 className="animate-spin size-8" />
+    </div>
+   );
+}
 export default Loading;

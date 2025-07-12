@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState,useMemo } from 'react'
 import getProductList from './api';
 import ProductList from './productList'
 import NoMatch from './NoMatching';
@@ -34,6 +34,7 @@ function ProductListPage() {
 
         return (lowerCasepName.indexOf(lowerCaseQuery) != -1);   
     });
+  
  
 
   function filterData(event){
@@ -42,9 +43,11 @@ function ProductListPage() {
     console.log("new data",data);
      //changeData(data);
   }
+  
     function handleSort(event){
       setSort(event.target.value);
     }
+    useMemo(function(){
     console.log(sort);
     if (sort == "price"){
       data.sort(function(x,y){
@@ -56,6 +59,8 @@ function ProductListPage() {
       });
         
       }
+    },[sort,data]);
+    
 
  if(loading){
   return <Loading/>;

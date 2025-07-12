@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+
+
 function ProductDetail(props){                       //product file in class lecture
     const{thumbnail,title,category,price,id,description,dimensions,discountPercentage,images,meta,minimumOrderQuantity,
         rating,returnPolicy,stock,weight
