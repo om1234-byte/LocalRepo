@@ -1,0 +1,124 @@
+
+Basic rules:
+ custom Tag names must start with Capital letters
+ we use reactive approach instead of declarative
+ break your task in different component 
+ don't  do over Optimisation
+ Http is a state less protocol
+
+we can define function in jsx through number of ways
+ 1.function add1(x,y){
+  return x+y;
+ }
+ 2.const add2 = function(x,y){
+  return x+y;
+ }
+ 3.const add3 = (x,y){
+  return x+y;
+ }
+ above no 3 code is equivalent to
+ const add3 = (x,y) => x+y;    //the code return after fatarrow will be returned
+ but in this code their may be confusion while returning object so to avoid this use paranthesis
+ e.g.
+ const obj = () => ({1:2, 2:2, 3:2});    //() are empty as their aren't passing an argunment
+
+npm run build create a dist file
+ dist file is a file in which all the content which is directly or indirectly mentioned in main function or inside into 
+ public folder are all convert into single html file named dist
+ all the file in public folder copy as it is but other files content are uglify 
+ 
+
+ npm run dev also create a dist file but in backend and reiniate it automatically again and again as comered to npm run dev
+ which make dist file only once and show it on folder ,every time we reload a dist file created and that file send to data base 
+
+CONTEXT:-
+ when we need to send data from parent to children we can send it by passing in children props but if we have multiple stages
+ e.g A has a children B ,B has children C ,C has children D and we want to send data through A to D ,we pass data  from A to props 
+ of B then recevie at B then send into props of C then recevie at level C then send into props of D and then use it.
+ To avoid this irrelevent flow of data we use two methods named as "context" and "redux" here we discuss about context.
+
+ By using context we can directly send data from one level to another level i.e. A to D directly 
+ syntax/process:
+ export const [variable_name] = React.createContext();
+ <[variable_name].Provider value={[data]}>
+   //all the children tag that can access data by importing context
+  <[variable_name].Provider />
+  To import in other file:
+  const [new_variable] = useContext([variable_name])
+ 
+
+ eg. //In file A
+  export const countContext = React.createContext();
+  const count=5;
+  const data = {count , name:"raja" , mark:88}
+ <countContext.Provider value={data}>
+   <B />                          //even children of B--> C and D can use this data by directly importing countContext.
+  <countContext.Provider />
+
+  //In file D
+  import {countContext} from "./A";
+  const {count,name,mark} = useContext(countContext)  //object destructuring
+
+  we can even create and use multiple context and even write them in nested format
+  e.g.
+  <countContext.Provider value={data1}>
+     <anotherContext.Provider value={data2}>
+      <A />
+      ... any other children tag
+     </anotherContext.Provider>
+  </countContext.Provider>
+
+HOC:-
+ react component are functions that return JSX (HTML)
+ HOC (Higher order component) are not a componentthe are component modifiers .
+ hoc is a function jo ki parameter mein ek component lega aur ek naya component return kar dega.
+ we can also create our own hoc
+ usually 2 reasons to use HOC :
+ 1.add something new to our component 
+ 2.makes our component simpler 
+
+ HOC function (these are called HOOKS)
+ 1.memo() : memorize the tag data, it see wheater input props changed or not, the tag  inside it run one time and memorize the data and then next time you rerun any file
+ then that component do not rerun itself it return the memorize data  if their is no change in input props
+
+ eg inport {memo} from "react";
+   function button(){
+    console.log(button run);
+ }
+ const newbutton = memo(button);
+ export default newbutton;
+
+ it is use in pure function
+ pure function - output depend on input
+ impure function - output depend on other things as well
+
+ 2.useMemo : similar as useEffect but memorize the data of function and return same data if input (dependency) is not changed .i.e. do not 
+ rerun function inside it while reruning the file
+ eg.   
+ import {useMemo} from "react";
+ const square = useMemo(
+  function (){
+    console.log("calcuting square ");
+    return (count*count);
+  },
+  [count]             //dependency
+ );
+ in the above code [count] is the dependency ,useMemo run the function inside it at first time file run or when the dependency
+ count in this case change and at other time it return the previous memorize ans i.e. data
+
+ 3.useCallback : it memorize the data usually functions in first page run and return the first stored data irresprctive how many 
+ times you rerun the file till their is change in its dependency
+ eg.
+ import {useCallback} from "react";
+ const changeCount = useCallback(
+  function(){
+    const newCount = count +1;
+    setCount(newCount);        // call function for use state
+  },
+  [count]                           //dependency
+ );
+ in the above function the function inside useCallback will create each time when file rerun but it give always give old 
+ function which create at first time till the dependency change ;
+
+
+

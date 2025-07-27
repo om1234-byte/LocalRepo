@@ -1,11 +1,20 @@
-import { useEffect, useState,useMemo } from 'react'
+import React from "react";
+import { useEffect, useState,useMemo, memo,useContext } from 'react'
 import getProductList from './api';
 import ProductList from './productList'
 import NoMatch from './NoMatching';
 import Loading from './loading';
-
+import userContext from "../projects/context"; 
+import { Navigate } from "react-router-dom";
 
 function ProductListPage() {
+
+ const{user}=useContext(userContext);
+  
+  if(!user){
+      console.log("navigate worked");
+      return <Navigate to ="/Login"/>
+    }
 
   const [ProductData,setProductList]=useState([]);
   const[loading,setLoading]=useState(true);
@@ -13,7 +22,10 @@ function ProductListPage() {
  // const [count, setCount] = useState(0)      //inform react about any change in code
     const[query,setQuery]=useState("");
     const[sort,setSort]=useState('default');
+    
    
+
+
 
   useEffect(function(){                         // run only when new data mount on screen
     const list = getProductList();
@@ -21,7 +33,7 @@ function ProductListPage() {
                                                    //vary as per  different web site this website response include object named data containing an array of name products which contain data                                             //their are some other keys in object.response also have header data,body data,configure data and many more. 
     setProductList(products);
     setLoading(false);
-   } );
+   } ).catch( <NoMatch text={"Poor internet connection"}/>);
 
    },[]);
     
@@ -61,10 +73,12 @@ function ProductListPage() {
       }
     },[sort,data]);
     
+  
 
  if(loading){
   return <Loading/>;
  }
+  
  return( 
  <div className='max-w-6xl bg-white px-20 m-auto py-[50px] my-10 '>
  <input onChange={filterData} 

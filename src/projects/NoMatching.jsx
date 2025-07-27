@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import image from "./notFound.png"
 
 function NoMatch({text}){
@@ -12,4 +12,4 @@ function NoMatch({text}){
     </>;
 }
 
-export default  NoMatch;
+export default  memo(NoMatch);
