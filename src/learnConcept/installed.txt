@@ -1,0 +1,19 @@
+
+INSTALLED-{
+    npm
+    vite-(react,tailwind)
+    router-(react-router-dom)
+    axios
+    react-icons
+    git
+    formik
+    yup
+
+}
+
+
+SITE_USED-{
+    dummyjson
+    postman
+    snippet
+}

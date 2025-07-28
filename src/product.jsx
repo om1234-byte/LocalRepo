@@ -1,12 +1,23 @@
-import React, {useState, useEffect } from "react";
+import React, {useState, useEffect, useContext } from "react";
 import { useParams,Link } from "react-router-dom";
 //import alldata from "./projects/DummyData";
 import { getProductData } from "./projects/api";
-import Loading from "./projects/loading";
+import Loading, { imageLoading } from "./projects/loading";
 import NoMatch from "./projects/NoMatching";
+
+import { Navigate } from "react-router-dom";
+import userContext from "./projects/context";
 
 
 export function Products({addToCart}){
+    const{user}=useContext(userContext);
+       
+       
+       if(!user){
+           console.log("navigate worked");
+           return <Navigate to ="/Login"/>
+         }
+   
 
    const params=useParams();   //it take out varibes from url and create object of that and thrn return it 
    const id=+(params.id);
@@ -53,12 +64,12 @@ useEffect(function (){
       return <NoMatch text={"Opps! Page not found"}/>
    }
   
-    
+ 
     return  (
     <>
        <Link to="/" className="mt-4 p-1 bg-indigo-600 "> Back to product page</Link>
     <div>
-        <img className='w-40' src={product.thumbnail } alt="not load"/>
+        <img className='w-40' src={product.thumbnail } alt={<imageLoading/>}/>
      <h1>{product.title}</h1>
      <p>{product.category}</p>
      <p>{product.prize}</p>
@@ -75,4 +86,5 @@ useEffect(function (){
  
 }
 
-    
+
+
